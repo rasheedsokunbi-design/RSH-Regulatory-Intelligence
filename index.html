@@ -9,7 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
+
+
+</script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -209,6 +212,32 @@ html{font-family:'Poppins',sans-serif;font-size:16px;color:var(--text);backgroun
 .map-popup-grade{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:700;margin-bottom:4px}
 .map-popup-meta{font-size:11px;color:#7a7875;margin-bottom:6px}
 .map-popup-link{font-size:11px;color:#035341;font-weight:600;cursor:pointer;text-decoration:underline}
+
+
+/* ── DG Cities services tab ──────────────────────────────────────────────── */
+.dgc-intro{background:var(--grey);border-radius:10px;padding:16px 18px;margin-bottom:18px;font-size:13px;color:var(--text2);line-height:1.7}
+.dgc-intro b{color:var(--text)}
+.dgc-card{border-radius:12px;overflow:hidden;border:1px solid var(--grey2);background:white;margin-bottom:14px;transition:box-shadow .15s}
+.dgc-card.recommended{border:1.5px solid #CFEF6C;box-shadow:0 4px 20px rgba(207,239,108,0.18)}
+.dgc-card-head{background:linear-gradient(135deg,#035341 0%,#024434 100%);padding:16px 20px}
+.dgc-card-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#CFEF6C;margin-bottom:8px}
+.dgc-card-tag svg{flex-shrink:0}
+.dgc-card-recbadge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:#CFEF6C;color:#035341;padding:3px 9px;border-radius:5px;margin-bottom:8px;float:right}
+.dgc-card-title{font-size:15px;font-weight:700;color:white;margin-bottom:4px;line-height:1.35}
+.dgc-card-sub{font-size:12px;color:rgba(255,255,255,.65)}
+.dgc-card-body{padding:16px 20px}
+.dgc-card-desc{font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:12px}
+.dgc-card-trigger{font-size:11px;color:var(--text3);margin-bottom:12px;font-style:italic;background:var(--grey);padding:8px 12px;border-radius:6px}
+.dgc-card-stat{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.dgc-card-stat-item{background:var(--grey);border-radius:8px;padding:10px 14px;flex:1;min-width:120px}
+.dgc-card-stat-num{font-size:18px;font-weight:700;color:#035341}
+.dgc-card-stat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.dgc-card-cta{display:inline-flex;align-items:center;gap:6px;background:#035341;color:white;font-size:12px;font-weight:700;padding:8px 16px;border-radius:7px;text-decoration:none;transition:background .15s}
+.dgc-card-cta:hover{background:#024434}
+.dgc-card.recommended .dgc-card-cta{background:#CFEF6C;color:#035341}
+.dgc-card.recommended .dgc-card-cta:hover{background:#bce04f}
+.dgc-footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px;padding:16px;background:var(--grey);border-radius:10px}
+.dgc-footer-logo span{font-size:11px;color:var(--text3)}
 
 </style>
 </head>
@@ -486,6 +515,7 @@ function selectProvider(idx){
         <button class="tab-btn" onclick="switchTab(this,'peers')">Similar providers</button>
         <button class="tab-btn" onclick="switchTab(this,'region')">Regional benchmark</button>
         <button class="tab-btn" onclick="switchTab(this,'compare')">Grade comparison</button>
+        <button class="tab-btn" onclick="switchTab(this,'dgcities')">How DG Cities can help</button>
       </div>
       
       <div class="tab-pane active" id="tab-findings">
@@ -559,6 +589,9 @@ function selectProvider(idx){
       <div class="tab-pane" id="tab-compare">
         <div id="compare-wrap"></div>
       </div>
+      <div class="tab-pane" id="tab-dgcities">
+        <div id="dgcities-wrap"></div>
+      </div>
     </div>
   `;
   
@@ -566,6 +599,7 @@ function selectProvider(idx){
   currentComparatorIdx=null;
   renderRegionBenchmark(p);
   renderCompareTab(p);
+  renderDGCitiesTab(p);
   
   // scroll detail into view on mobile
   if(window.innerWidth<860)document.getElementById('detail-panel').scrollIntoView({behavior:'smooth',block:'start'});
@@ -1264,6 +1298,129 @@ function renderMapMarkers(){
   });
 }
 
+
+// ── DG Cities service recommendation ──────────────────────────────────────────
+
+// ── DG Cities services tab ────────────────────────────────────────────────────
+
+const DGC_LOGO_SVG = `<svg width="64" height="20" viewBox="0 0 90 28" xmlns="http://www.w3.org/2000/svg" aria-label="DG Cities">
+  <text x="0" y="21" font-family="Poppins,sans-serif" font-size="19" font-weight="600" fill="#035341" letter-spacing="-0.5">dg</text>
+  <text x="26" y="21" font-family="Poppins,sans-serif" font-size="19" font-weight="400" fill="#CFEF6C" letter-spacing="-0.5">:</text>
+  <text x="34" y="21" font-family="Poppins,sans-serif" font-size="19" font-weight="400" fill="#035341" letter-spacing="-0.3">cities</text>
+</svg>`;
+
+const DGC_ICON_DIAMOND = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#CFEF6C" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#CFEF6C" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const DGC_ICON_DROP    = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 5 10 5 14.5C5 18.09 8.13 21 12 21C15.87 21 19 18.09 19 14.5C19 10 12 2 12 2Z" stroke="#CFEF6C" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const DGC_ICON_CHART   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 21V9M9 21V3M15 21V13M21 21V6" stroke="#CFEF6C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const DGC_EXT_ARROW    = `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const DGC_SERVICES = [
+  {
+    id: 'damp',
+    icon: DGC_ICON_DROP,
+    tag: 'Damp & Mould Intelligence Service',
+    title: 'Move from reactive repairs to proactive risk management',
+    sub: 'Environmental sensors + housing data integration',
+    desc: `Our Damp & Mould Intelligence Service uses environmental sensors integrated with housing data systems to identify risk before it becomes a complaint. We help landlords target interventions where they'll have the greatest impact, demonstrate measurable improvement to RSH and residents, and build a robust financial case for scaling sensor deployment.`,
+    stats: [
+      {num:'ASCP 2025', lbl:'Best Response to Awaab\'s Law — Greenwich pilot'},
+      {num:'24mo', lbl:'Monitoring period'},
+      {num:'↓', lbl:'Reduction in disrepair cases reported'}
+    ],
+    triggers: ['damp','mould','condensation','ventilation','mould wash'],
+    cta: 'https://www.dgcities.com/'
+  },
+  {
+    id: 'hbh',
+    icon: DGC_ICON_DIAMOND,
+    tag: 'Home by Home Plan',
+    title: 'Turn stock condition data into a property-by-property action plan',
+    sub: 'Stock condition, repairs & EPC data consolidation',
+    desc: `The Home by Home Plan helps landlords consolidate stock condition, repairs, EPC, compliance and tenant satisfaction data into a single, actionable plan — defining what work each home needs, when, and at what cost. Our traffic-light prioritisation system and AI-driven repairs analysis give providers a robust, data-led evidence base for investment decisions and RSH compliance.`,
+    stats: [
+      {num:'100k+', lbl:'Repairs records analysed via AI'},
+      {num:'£15m', lbl:'Example savings across a 5-year capital programme using RAG prioritisation'},
+      {num:'3', lbl:'Phases: Data → Plan → Deliver'}
+    ],
+    triggers: ['stock condition','decent home','non-decent','survey','asset data','component','investment decision','property data','condition data','epc'],
+    cta: 'https://www.dgcities.com/'
+  },
+  {
+    id: 'eval',
+    icon: DGC_ICON_CHART,
+    tag: 'Evaluation & Impact Assessment',
+    title: 'Evidence what works — and build the case for what comes next',
+    sub: 'Process, impact & value-for-money evaluation',
+    desc: `DG Cities' evaluation team helps landlords and councils understand whether interventions — from damp remediation to retrofit programmes — are delivering as expected. Using a 5-step Diagnose → Co-design → Capture → Learn → Apply approach across people, place and technology, we help build robust evidence for funding bids, regulatory engagement and strategic decisions.`,
+    stats: [
+      {num:'9', lbl:'Themes across people, place & tech'},
+      {num:'5', lbl:'Step evaluation framework'},
+      {num:'M&E', lbl:'Grant-funding compliance expertise'}
+    ],
+    triggers: ['governance','risk','strateg','board','self-referral','self-refer','transparency','complaint','engagement'],
+    cta: 'https://www.dgcities.com/'
+  }
+];
+
+function renderDGCitiesTab(p){
+  const wrap = document.getElementById('dgcities-wrap');
+  if(!wrap) return;
+
+  const text = ((p.consumer_failures||'') + ' ' + (p.governance_failures||'') + ' ' + (p.viability_failures||'') + ' ' + (p.improvement_actions||'')).toLowerCase();
+  const myGN = gradeNum(p.consumer_grade);
+
+  // Determine which service is most relevant
+  let recommendedId = null;
+  let recommendedTrigger = null;
+
+  if(myGN && myGN > 1){
+    for(const svc of DGC_SERVICES){
+      const hit = svc.triggers.find(t=>text.includes(t));
+      if(hit){ recommendedId = svc.id; recommendedTrigger = hit; break; }
+    }
+  }
+
+  const intro = `<div class="dgc-intro">
+    DG Cities is a London-based innovation agency working across housing data, environmental sensing and impact evaluation —
+    helping local authorities and housing associations move from reactive management to <b>data-led, intelligence-driven decision making</b>.
+    Below are the services most relevant to providers navigating RSH consumer standard improvements.
+  </div>`;
+
+  const cards = DGC_SERVICES.map(svc => {
+    const isRec = svc.id === recommendedId;
+    const statsHtml = svc.stats.map(s=>`
+      <div class="dgc-card-stat-item">
+        <div class="dgc-card-stat-num">${s.num}</div>
+        <div class="dgc-card-stat-lbl">${s.lbl}</div>
+      </div>`).join('');
+
+    const triggerHtml = isRec
+      ? `<div class="dgc-card-trigger">Recommended for ${p.name} — this provider's findings reference "${recommendedTrigger}"</div>`
+      : '';
+
+    return `<div class="dgc-card ${isRec?'recommended':''}">
+      <div class="dgc-card-head">
+        ${isRec?`<div class="dgc-card-recbadge">★ Recommended</div>`:''}
+        <div class="dgc-card-tag">${svc.icon} ${svc.tag}</div>
+        <div class="dgc-card-title">${svc.title}</div>
+        <div class="dgc-card-sub">${svc.sub}</div>
+      </div>
+      <div class="dgc-card-body">
+        ${triggerHtml}
+        <div class="dgc-card-desc">${svc.desc}</div>
+        <div class="dgc-card-stat">${statsHtml}</div>
+        <a class="dgc-card-cta" href="${svc.cta}" target="_blank" rel="noopener">Find out more ${DGC_EXT_ARROW}</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  const footer = `<div class="dgc-footer-logo">
+    ${DGC_LOGO_SVG}
+    <span>Innovation & Net Zero · Housing Data Services · dgcities.com</span>
+  </div>`;
+
+  wrap.innerHTML = intro + cards + footer;
+}
 </script>
 
 <!-- INSIGHTS PANEL -->
