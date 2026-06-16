@@ -785,8 +785,8 @@ function renderRegionBenchmark(p) {
     const pct  = total > 0 ? Math.round(cnt/total*100) : 0;
     const bold = isMe ? 'font-weight:700;' : '';
     const tag  = isMe ? `<span style="display:inline-block;background:${col};color:white;font-size:9px;font-weight:700;border-radius:3px;padding:1px 5px;margin-left:5px;vertical-align:middle">YOU</span>` : '';
-    return `<div style="display:grid;grid-template-columns:44px 1fr 36px;align-items:center;gap:7px;margin-bottom:7px">
-      <span style="font-size:11px;${bold}color:var(--text2)">${label}${tag}</span>
+    return `<div style="display:grid;grid-template-columns:160px 1fr 46px;align-items:center;gap:7px;margin-bottom:7px">
+      <span style="font-size:11px;${bold}color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}${tag}</span>
       <div style="height:9px;background:var(--grey2);border-radius:5px;overflow:hidden">
         <div style="height:100%;width:${pct}%;background:${col};border-radius:5px"></div>
       </div>
