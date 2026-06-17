@@ -1676,22 +1676,31 @@ function cmpBuildDropdown(pIdx, query, ddEl) {
       ? section('Search results ('+results.length+')')+results.map(mkItem).join('')
       : '<div class="cmp-dd-item"><span style="color:var(--text3);font-size:12px">No results for "'+q+'"</span></div>';
   } else {
+    const wrap2 = document.getElementById('compare-wrap');
+    const isAll = wrap2 && wrap2._filters && wrap2._filters.has('all');
     const pool = cmpGetActivePool(p);
     const poolSet = new Set(pool);
-    // Sameish type others
-    const others = DATA.filter(d=>d!==p&&!poolSet.has(d)&&d.type===p.type&&d.consumer_grade&&d.consumer_grade!=='-')
-                       .sort((a,b)=>(b.region===p.region?1:0)-(a.region===p.region?1:0))
-                       .slice(0,10);
     if(pool.length) {
-      out += section('Matching your filters ('+pool.length+')');
-      out += pool.slice(0,20).map(mkItem).join('');
-      if(pool.length>20) out += '<div style="padding:8px 14px;font-size:11px;color:var(--text3)">+ '+(pool.length-20)+' more — type a name to search all</div>';
+      // Label: 'All providers' when all selected, otherwise show filter count
+      const poolLabel = isAll ? 'All providers ('+pool.length+')' : 'Matching your filters ('+pool.length+')';
+      out += section(poolLabel);
+      out += pool.map(mkItem).join(''); // show ALL — no cap
     }
-    if(others.length) {
-      out += section('Other '+(p.type==='Local Authority'?'Local Authorities':'PRPs'));
-      out += others.map(mkItem).join('');
+    // Only show 'Others' section when NOT in all-providers mode and NOT multi-selecting
+    if(!isAll && pool.length < DATA.length - 1) {
+      const activeCount = wrap2 && wrap2._filters ? wrap2._filters.size : 1;
+      // Don't show others when user has multi-selected specific filters
+      if(activeCount <= 1) {
+        const others = DATA.filter(d=>d!==p&&!poolSet.has(d)&&d.type===p.type&&d.consumer_grade&&d.consumer_grade!=='-')
+                           .sort((a,b)=>(b.region===p.region?1:0)-(a.region===p.region?1:0))
+                           .slice(0,8);
+        if(others.length) {
+          out += section('Other '+(p.type==='Local Authority'?'Local Authorities':'PRPs'));
+          out += others.map(mkItem).join('');
+        }
+      }
     }
-    if(!out) out = '<div class="cmp-dd-item"><span style="color:var(--text3);font-size:12px">No providers available</span></div>';
+    if(!out) out = '<div class="cmp-dd-item"><span style="color:var(--text3);font-size:12px">No providers match the selected filters</span></div>';
   }
 
   ddEl.innerHTML = out;
