@@ -3816,5 +3816,126 @@ function renderHRATab(p, wrap) {
 
 </script>
 
+
+<!-- ── Premium tab gate modal ──────────────────────────────────────────────── -->
+<div id="gate-overlay" style="position:fixed;inset:0;background:rgba(2,43,34,0.82);backdrop-filter:blur(5px);z-index:960;display:none;align-items:center;justify-content:center;padding:20px">
+  <div id="gate-box" style="background:white;border-radius:16px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.3)">
+    <div style="background:#035341;padding:22px 28px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="color:white;font-size:14px;font-weight:700">dg:<span style="color:#CFEF6C">cities</span> &nbsp;·&nbsp; RSH Portal</span>
+        <button onclick="gateClose()" style="background:rgba(255,255,255,0.15);border:none;color:white;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1">×</button>
+      </div>
+      <div style="font-size:18px;font-weight:700;color:white;margin-bottom:4px">Unlock this section</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.5">This section contains richer data — financial performance and tenant satisfaction intelligence — that requires a quick sign-up to access. Free, no password needed.</div>
+    </div>
+    <div style="padding:22px 28px">
+      <div id="gate-form">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div><label style="display:block;font-size:12px;font-weight:600;color:#4a4847;margin-bottom:5px">Full name *</label><input type="text" id="gate-name" placeholder="Jane Smith" autocomplete="name" style="width:100%;padding:9px 12px;font-size:13px;border:1px solid #e8e6e0;border-radius:8px;background:#F3F0F0;color:#1a1a1a;font-family:'Poppins',sans-serif;box-sizing:border-box;outline:none"></div>
+          <div><label style="display:block;font-size:12px;font-weight:600;color:#4a4847;margin-bottom:5px">Organisation *</label><input type="text" id="gate-org" placeholder="Housing Association" style="width:100%;padding:9px 12px;font-size:13px;border:1px solid #e8e6e0;border-radius:8px;background:#F3F0F0;color:#1a1a1a;font-family:'Poppins',sans-serif;box-sizing:border-box;outline:none"></div>
+        </div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:#4a4847;margin-bottom:5px">Email address *</label><input type="email" id="gate-email" placeholder="jane@example.com" autocomplete="email" style="width:100%;padding:9px 12px;font-size:13px;border:1px solid #e8e6e0;border-radius:8px;background:#F3F0F0;color:#1a1a1a;font-family:'Poppins',sans-serif;box-sizing:border-box;outline:none"></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:12px;font-weight:600;color:#4a4847;margin-bottom:5px">Your role *</label>
+          <select id="gate-role" style="width:100%;padding:9px 12px;font-size:13px;border:1px solid #e8e6e0;border-radius:8px;background:#F3F0F0;color:#1a1a1a;font-family:'Poppins',sans-serif;box-sizing:border-box;outline:none">
+            <option value="">Select your role…</option>
+            <option>Asset Manager</option><option>Housing Officer</option><option>Director / Head of Service</option><option>Consultant</option><option>Analyst / Researcher</option><option>Policy / Strategy</option><option>Other</option>
+          </select>
+        </div>
+        <div style="font-size:11px;color:#9e9c95;margin-bottom:12px;line-height:1.6">By registering you agree to our <a href="https://www.dgcities.com/privacy-policy" target="_blank" rel="noopener" style="color:#035341">privacy policy</a>. Your details will be stored securely and not shared with third parties.</div>
+        <div id="gate-error" style="font-size:12px;color:#dc2626;margin-top:8px;padding:8px 12px;background:#fef2f2;border-radius:6px;display:none"></div>
+        <button id="gate-submit-btn" onclick="gateSubmit()" style="width:100%;padding:11px;background:#035341;color:white;border:none;border-radius:8px;font-size:14px;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer;margin-top:4px">Access this section →</button>
+      </div>
+      <div id="gate-success" style="display:none;text-align:center;padding:20px 0">
+        <div style="font-size:36px;margin-bottom:10px">✓</div>
+        <div style="font-size:16px;font-weight:700;color:#035341;margin-bottom:6px">You're all set!</div>
+        <div style="font-size:13px;color:#4a4847;line-height:1.6">Access granted. You can now view financial and TSM data across all providers.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Feedback button & modal ────────────────────────────────────────────── -->
+<button id="feedback-btn" onclick="feedbackOpen()" style="position:fixed;bottom:24px;right:24px;z-index:900;background:#035341;color:#CFEF6C;border:none;border-radius:50px;padding:11px 20px;font-size:13px;font-weight:700;font-family:'Poppins',sans-serif;cursor:pointer;box-shadow:0 4px 20px rgba(3,83,65,0.35);display:flex;align-items:center;gap:8px">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Leave feedback
+</button>
+<div id="feedback-overlay" onclick="if(event.target===this)feedbackClose()" style="position:fixed;inset:0;background:rgba(3,83,65,0.7);backdrop-filter:blur(4px);z-index:950;display:none;align-items:center;justify-content:center;padding:20px">
+  <div style="background:white;border-radius:16px;width:100%;max-width:480px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.25);max-height:90vh;overflow-y:auto">
+    <div style="background:#035341;padding:20px 24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="color:white;font-size:14px;font-weight:700">dg:<span style="color:#CFEF6C">cities</span> &nbsp;·&nbsp; RSH Portal</span>
+        <button onclick="feedbackClose()" style="background:rgba(255,255,255,0.15);border:none;color:white;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1">×</button>
+      </div>
+      <div style="font-size:17px;font-weight:700;color:white;margin-bottom:4px">Share your feedback</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.5">Help us improve the portal. Takes 2 minutes — your input shapes what we build next.</div>
+    </div>
+    <div style="padding:20px 24px">
+      <div id="fb-form">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
+          <div class="fb-field"><label>Your name <span>(optional)</span></label><input type="text" id="fb-name" placeholder="Jane Smith" autocomplete="name"></div>
+          <div class="fb-field"><label>Organisation <span>(optional)</span></label><input type="text" id="fb-org" placeholder="Housing Association"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
+          <div class="fb-field"><label>Email <span>(optional)</span></label><input type="email" id="fb-email" placeholder="jane@example.com" autocomplete="email"></div>
+          <div class="fb-field"><label>Role <span>(optional)</span></label>
+            <select id="fb-role"><option value="">Select role…</option><option>Asset Manager</option><option>Housing Officer</option><option>Director / Head of Service</option><option>Consultant</option><option>Analyst / Researcher</option><option>Policy / Strategy</option><option>Other</option></select>
+          </div>
+        </div>
+        <div class="fb-field"><label>Do you find this tool relevant? *</label>
+          <div class="fb-radio-group"><label class="fb-radio"><input type="radio" name="fbq1" value="Yes">Yes</label><label class="fb-radio"><input type="radio" name="fbq1" value="Somewhat">Somewhat</label><label class="fb-radio"><input type="radio" name="fbq1" value="No">No</label></div>
+        </div>
+        <div class="fb-field"><label>Would you use it regularly? *</label>
+          <div class="fb-radio-group"><label class="fb-radio"><input type="radio" name="fbq2" value="Yes">Yes</label><label class="fb-radio"><input type="radio" name="fbq2" value="Occasionally">Occasionally</label><label class="fb-radio"><input type="radio" name="fbq2" value="Unlikely">Unlikely</label></div>
+        </div>
+        <div class="fb-field"><label>How would it help your work? *</label><textarea id="fb-q3" placeholder="e.g. benchmarking, board reports, identifying improvement areas…"></textarea></div>
+        <div class="fb-field"><label>What is missing to make it even better? *</label><textarea id="fb-q4" placeholder="e.g. more historical data, trend comparisons, downloadable reports…"></textarea></div>
+        <div class="fb-error" id="fb-error"></div>
+        <button class="fb-submit" id="fb-submit-btn" onclick="feedbackSubmit()">Submit feedback →</button>
+      </div>
+      <div id="fb-success" style="display:none;text-align:center;padding:30px 10px">
+        <div style="font-size:44px;margin-bottom:12px">🙏</div>
+        <div style="font-size:17px;font-weight:700;color:#035341;margin-bottom:8px">Thank you!</div>
+        <div style="font-size:13px;color:#4a4847;line-height:1.6">Your feedback has been recorded and will help shape the next version of the portal.</div>
+        <button onclick="feedbackClose()" style="margin-top:16px;padding:9px 24px;background:#035341;color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── About this data modal ──────────────────────────────────────────────── -->
+<div id="datasources-overlay" onclick="if(event.target===this)dataSourcesClose()" style="position:fixed;inset:0;background:rgba(2,43,34,0.85);backdrop-filter:blur(4px);z-index:950;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
+  <div style="background:white;border-radius:16px;width:100%;max-width:600px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="background:#035341;padding:22px 28px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span style="color:white;font-size:14px;font-weight:700">dg:<span style="color:#CFEF6C">cities</span></span>
+        <button onclick="dataSourcesClose()" style="background:rgba(255,255,255,0.15);border:none;color:white;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1">×</button>
+      </div>
+      <div style="font-size:18px;font-weight:700;color:white;margin-bottom:4px">About this data</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.5">The RSH Regulatory Intelligence portal aggregates and presents publicly available data from official sources. No data has been created, modified or inferred by DG Cities.</div>
+    </div>
+    <div style="padding:20px 28px;border-bottom:1px solid #e8e6e0">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#035341;margin-bottom:10px">Data sources</div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;align-items:flex-start"><span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:#15803d;white-space:nowrap;flex-shrink:0">RSH</span><div style="font-size:12px;color:#4a4847;line-height:1.6"><strong>RSH Regulatory Judgements</strong> — Consumer grades (C1–C4), governance and viability grades, inspection findings and improvement actions. Published by the Regulator of Social Housing.</div></div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;align-items:flex-start"><span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:#15803d;white-space:nowrap;flex-shrink:0">TSM 2025</span><div style="font-size:12px;color:#4a4847;line-height:1.6"><strong>Tenant Satisfaction Measures 2025</strong> — Provider-level TSM scores. Published by RSH for the year ending March 2025.</div></div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;align-items:flex-start"><span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:#15803d;white-space:nowrap;flex-shrink:0">GA2025</span><div style="font-size:12px;color:#4a4847;line-height:1.6"><strong>Global Accounts 2025</strong> — Financial data for Private Registered Providers. Published by RSH, December 2025.</div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:#15803d;white-space:nowrap;flex-shrink:0">RO4 2024-25</span><div style="font-size:12px;color:#4a4847;line-height:1.6"><strong>MHCLG Revenue Outturn (RO4) 2024-25</strong> — Actual housing expenditure for Local Authorities including Housing Revenue Account data. Published by MHCLG, June 2026.</div></div>
+    </div>
+    <div style="padding:16px 28px;border-bottom:1px solid #e8e6e0;font-size:12px;color:#4a4847;line-height:1.8">
+      <strong>Grades</strong> reflect the most recently published RSH judgement.<br>
+      <strong>TSM and GA financial data</strong> relate to the year ending March 2025.<br>
+      <strong>LA financial data</strong> is actuals for 2024-25 (April 2024 to March 2025).<br>
+      <strong>Homes managed</strong> figures are approximate from the RSH register.
+    </div>
+    <div style="padding:16px 28px;font-size:12px;color:#4a4847;line-height:1.8">
+      This portal is managed by <strong>DG Cities Ltd</strong>, 13 Soames Walk, London SE10 0AX. Registered number: 09765525 (England and Wales).<br>
+      © DG Cities Ltd. 2026. All rights reserved.<br>
+      <a href="https://www.dgcities.com/privacy-policy" target="_blank" rel="noopener" style="color:#035341;font-weight:600">View our full privacy policy →</a>
+    </div>
+    <div style="padding:14px 28px;background:#f9f8f6;display:flex;justify-content:flex-end">
+      <button onclick="dataSourcesClose()" style="padding:9px 24px;background:#035341;color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer">Close</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
