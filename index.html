@@ -3272,19 +3272,57 @@ const TSM_MGMT_LABELS = {
 // Metrics where lower is better
 const TSM_LOWER_BETTER = new Set(['rp01','nm01','ch01_1','ch01_2']);
 
-function tsmRag(val, avg, lowerBetter) {
-  if(val === null || avg === null) return 'neutral';
+// Metric type classifications for smarter RAG thresholds
+const TSM_SAFETY_METRICS    = new Set(['bs01','bs02','bs03','bs04','bs05']);
+const TSM_COMPLAINT_RATE    = new Set(['ch02_1','ch02_2']);  // response rate %
+const TSM_REPAIRS_ONTIME    = new Set(['rp02_1','rp02_2']);  // repairs on time %
+
+function tsmRag(val, avg, lowerBetter, metricKey) {
+  if(val === null) return 'neutral';
+
+  // Safety compliance (bs01-bs05): green ≥95%, amber 90-95%, red <90%
+  // 100% is perfect — don't penalise for being near the average
+  if(metricKey && TSM_SAFETY_METRICS.has(metricKey)) {
+    if(val >= 95) return 'green';
+    if(val >= 90) return 'amber';
+    return 'red';
+  }
+
+  // Complaint response rate (ch02_1, ch02_2): green ≥90%, amber 75-90%, red <75%
+  // RSH expectation is all complaints responded to on time
+  if(metricKey && TSM_COMPLAINT_RATE.has(metricKey)) {
+    if(val >= 90) return 'green';
+    if(val >= 75) return 'amber';
+    return 'red';
+  }
+
+  // Repairs on time (rp02_1, rp02_2): green ≥85%, amber 70-85%, red <70%
+  if(metricKey && TSM_REPAIRS_ONTIME.has(metricKey)) {
+    if(val >= 85) return 'green';
+    if(val >= 70) return 'amber';
+    return 'red';
+  }
+
+  // Non-decent homes (rp01): green <2%, amber 2-8%, red >8%
+  if(metricKey === 'rp01') {
+    if(val <= 2) return 'green';
+    if(val <= 8) return 'amber';
+    return 'red';
+  }
+
+  // Default: compare against national average with 5pp threshold
+  if(avg === null) return 'neutral';
   const diff = lowerBetter ? avg - val : val - avg;
   if(diff >= 5) return 'green';
   if(diff <= -5) return 'red';
   return 'amber';
 }
 
-function tsmBar(val, avg, maxVal, lowerBetter, gradeAvg, grade) {
+function tsmBar(val, avg, maxVal, lowerBetter, gradeAvg, grade, metricKey) {
   if(val === null) return '<div class="tsm-bar-wrap"><span style="font-size:11px;color:var(--text3)">No data</span></div>';
   const pct = Math.min(100, (val / maxVal) * 100);
   const avgPct = Math.min(100, (avg / maxVal) * 100);
-  const rag = tsmRag(val, avg, lowerBetter);
+  const rag = tsmRag(val, avg, lowerBetter, metricKey);
   const col = rag==='green'?'#22c55e': rag==='red'?'#ef4444':'#f59e0b';
   // Grade avg line (same grade average)
   const gradeAvgPct = (gradeAvg !== null && gradeAvg !== undefined) ? Math.min(100, (gradeAvg / maxVal) * 100) : null;
@@ -3346,14 +3384,14 @@ function renderTSMTab(p) {
     for(const [key, label] of Object.entries(TSM_PERC_LABELS)) {
       const val = perc[key];
       const avg = TSM_PERC_AVG[key];
-      const rag = tsmRag(val, avg, false);
+      const rag = tsmRag(val, avg, false, key);
       const valCol = rag==='green'?'#15803d': rag==='red'?'#b91c1c':'#854d0e';
       const _myGN = gradeNum(p.consumer_grade);
       const gradeAvgP = _myGN && typeof TSM_GRADE_AVGS !== 'undefined' ? (TSM_GRADE_AVGS[p.consumer_grade.replace('*','').slice(0,2)]?.perc[key] || null) : null;
       const myGrade = p.consumer_grade.replace('*','').slice(0,2);
       out += `<div class="tsm-row">
         <div class="tsm-label">${label}</div>
-        ${tsmBar(val, avg, 100, false, gradeAvgP, myGrade)}
+        ${tsmBar(val, avg, 100, false, gradeAvgP, myGrade, key)}
         <div class="tsm-val" style="color:${val!==null?valCol:'var(--text3)'}">${val!==null?val+'%':'—'}</div>
         <div class="tsm-nat">${avg!==null?avg+'%':'—'}</div>
       </div>`;
@@ -3376,14 +3414,14 @@ function renderTSMTab(p) {
         const val = mgmt[key];
         const avg = TSM_MGMT_AVG[key];
         const lb = TSM_LOWER_BETTER.has(key);
-        const rag = tsmRag(val, avg, lb);
+        const rag = tsmRag(val, avg, lb, key);
         const valCol = rag==='green'?'#15803d': rag==='red'?'#b91c1c':'#854d0e';
         const isPercent = !['nm01','ch01_1','ch01_2'].includes(key);
         const suffix = isPercent ? '%' : '';
         const maxVal = isPercent ? 100 : Math.max((avg||0)*3, (val||0)*1.5, 1);
         s += `<div class="tsm-row">
           <div class="tsm-label">${TSM_MGMT_LABELS[key]}</div>
-          ${tsmBar(val, avg, maxVal, lb)}
+          ${tsmBar(val, avg, maxVal, lb, null, null, key)}
           <div class="tsm-val" style="color:${val!==null?valCol:'var(--text3)'}">${val!==null?val+suffix:'—'}</div>
           <div class="tsm-nat">${avg!==null?avg+suffix:'—'}</div>
         </div>`;
