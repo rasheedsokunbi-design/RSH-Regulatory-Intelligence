@@ -870,6 +870,200 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .hra-s114-badge{display:inline-flex;align-items:center;gap:6px;background:#fef2f2;
   border:1.5px solid #fecaca;border-radius:8px;padding:10px 14px;margin-bottom:14px;width:100%;box-sizing:border-box}
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — applies only on screens ≤ 480px (phones)
+   Desktop is completely unaffected by anything in this block
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* ── Header ─────────────────────────────────────────────────────────────── */
+  .header-inner {
+    padding: 8px 14px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  #header-logo { transform: scale(0.85); transform-origin: left center; }
+  #header-tagline { display: none; }
+  #header-btns { gap: 6px; }
+  #header-btns button { font-size: 11px !important; padding: 6px 10px !important; }
+
+  /* ── Hero search section ─────────────────────────────────────────────────── */
+  #hero { padding: 20px 14px 16px; }
+  .hero-title { font-size: 22px; }
+  .hero-sub { font-size: 12px; }
+  #search-input { font-size: 14px; padding: 10px 14px; }
+  .filter-pills { gap: 5px; }
+  .filter-pill { font-size: 11px; padding: 5px 10px; }
+
+  /* ── Stats bar ───────────────────────────────────────────────────────────── */
+  #stats-bar { padding: 6px 14px; gap: 8px; flex-wrap: wrap; }
+  .sitem { font-size: 11px; }
+  #insights-btn { font-size: 11px !important; padding: 5px 10px !important; margin-left: auto; }
+
+  /* ── Main layout — single column grid ───────────────────────────────────── */
+  #main {
+    grid-template-columns: 1fr !important;
+    padding: 10px !important;
+    gap: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--grey2);
+    max-height: 200px;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  #detail {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 1;
+  }
+  /* Fix sticky detail panel — disable on mobile */
+  #detail-panel {
+    position: static !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    overflow-x: hidden !important;
+  }
+  /* Prevent detail-panel from scrolling when tab buttons are clicked */
+  .dbody {
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+  /* Make only the tab-nav scroll, not its parent */
+  .tab-nav {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+  }
+  /* Ensure all tab panes fill the detail panel */
+  .tab-pane {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    padding: 12px !important;
+  }
+  #provdetail { display: block !important; }
+
+  /* ── Provider list items ─────────────────────────────────────────────────── */
+  .ritem { padding: 9px 12px; }
+  .rname { font-size: 13px; }
+  .rtype { font-size: 11px; }
+
+  /* ── Provider detail header ──────────────────────────────────────────────── */
+  .dh-inner { padding: 14px 14px 12px; }
+  .dh-name { font-size: 18px; }
+  .dh-meta { flex-wrap: wrap; gap: 5px; }
+  .dh-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .dh-grades { grid-template-columns: 1fr 1fr; gap: 6px; }
+
+  /* ── Tab bar — scrollable ────────────────────────────────────────────────── */
+  .tab-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: 0 4px;
+    /* Fade edges to hint scrollability */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-size: 11px !important;
+    padding: 10px 10px !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Tab content padding ─────────────────────────────────────────────────── */
+  .tab-pane { padding: 14px 12px !important; }
+
+  /* ── Finance headline cards — stack to 2 cols ────────────────────────────── */
+  .fin-headline { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .fin-card-val { font-size: 17px; }
+  .fin-bar-row { grid-template-columns: 120px 1fr 60px !important; font-size: 11px; }
+
+  /* ── TSM rows ────────────────────────────────────────────────────────────── */
+  .tsm-row { grid-template-columns: 130px 1fr 44px 44px !important; gap: 4px; }
+  .tsm-label { font-size: 11px; }
+  .tsm-val { font-size: 11px; }
+  .tsm-nat { font-size: 10px; }
+
+  /* ── Finance tab — fix blank rendering (min-height forces reflow) ────────── */
+  #finance-wrap, #tsm-wrap { min-height: 10px; width: 100%; }
+  .fin-maint-grid { grid-template-columns: 1fr !important; gap: 8px; }
+
+  /* ── HRA headline cards ──────────────────────────────────────────────────── */
+  .hra-headline { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .hra-card-val { font-size: 17px; }
+  .hra-bar-row { grid-template-columns: 110px 1fr 60px !important; font-size: 11px; }
+
+  /* ── Percentage ratio grid (3 col → 1 col) ───────────────────────────────── */
+  #finance-wrap [style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  #tsm-wrap [style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Grade comparison ────────────────────────────────────────────────────── */
+  .cmp-header { grid-template-columns: 100px 1fr 1fr !important; font-size: 11px; }
+  .cmp-col-head { font-size: 11px; }
+  .cmp-row { grid-template-columns: 100px 1fr 1fr !important; font-size: 11px; }
+  .cmp-search-wrap input { font-size: 13px; }
+  .cmp-filter-bar { flex-wrap: wrap; gap: 5px; }
+  .cmp-filter-btn { font-size: 11px; padding: 4px 10px; }
+
+  /* ── Similar providers grid ──────────────────────────────────────────────── */
+  .peer-grid { grid-template-columns: 1fr !important; }
+
+  /* ── Sector benchmark bars ───────────────────────────────────────────────── */
+  .bm-wrap { padding: 12px; }
+  .bm-bar-row { gap: 6px; }
+
+  /* ── Feedback button — icon only on mobile ──────────────────────────────── */
+  #feedback-btn {
+    bottom: 16px;
+    right: 14px;
+    padding: 13px;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    justify-content: center;
+    box-shadow: 0 3px 14px rgba(3,83,65,0.45);
+  }
+  .fb-btn-label { display: none; }
+
+  /* ── Feedback/gate modals — full width on phone ──────────────────────────── */
+  #feedback-overlay, #gate-overlay, #datasources-overlay { padding: 10px; align-items: flex-end; }
+  #feedback-overlay > div, #gate-box, #datasources-overlay > div {
+    max-width: 100% !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  /* ── Bottom content padding so feedback btn doesn't overlap ─────────────── */
+  #footer { padding-bottom: 70px; }
+}
+
 </style>
 <script>
 /* ── Leaflet JS inlined ─── */
@@ -1640,6 +1834,9 @@ function switchTab(btn,tabId){
   btn.classList.add('active');
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+tabId).classList.add('active');
+  // On mobile: prevent detail-panel from auto-scrolling when tab button is outside view
+  const dp = document.getElementById('detail-panel');
+  if(dp) dp.scrollLeft = 0;
 }
 
 // Search
@@ -3865,7 +4062,7 @@ function renderHRATab(p, wrap) {
 <!-- ── Feedback button & modal ────────────────────────────────────────────── -->
 <button id="feedback-btn" onclick="feedbackOpen()" style="position:fixed;bottom:24px;right:24px;z-index:900;background:#035341;color:#CFEF6C;border:none;border-radius:50px;padding:11px 20px;font-size:13px;font-weight:700;font-family:'Poppins',sans-serif;cursor:pointer;box-shadow:0 4px 20px rgba(3,83,65,0.35);display:flex;align-items:center;gap:8px">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  Leave feedback
+  <span class="fb-btn-label">Leave feedback</span>
 </button>
 <div id="feedback-overlay" onclick="if(event.target===this)feedbackClose()" style="position:fixed;inset:0;background:rgba(3,83,65,0.7);backdrop-filter:blur(4px);z-index:950;display:none;align-items:center;justify-content:center;padding:20px">
   <div style="background:white;border-radius:16px;width:100%;max-width:480px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.25);max-height:90vh;overflow-y:auto">
