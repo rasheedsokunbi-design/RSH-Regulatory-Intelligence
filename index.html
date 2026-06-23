@@ -4142,5 +4142,665 @@ function renderHRATab(p, wrap) {
   </div>
 </div>
 
+
+
+
+<!-- ── Assessment Guide Modal ───────────────────────────────────────────── -->
+<div id="guide-overlay" onclick="if(event.target===this)closeGuide()">
+  <div id="guide-panel">
+
+    <div class="guide-header">
+      <button class="guide-close" onclick="closeGuide()">✕</button>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px">Regulator of Social Housing · England</div>
+      <h1>Regulatory Assessment Framework</h1>
+      <p>A guide to how social housing providers are assessed, graded and held to account · 290 registered providers · Source: RSH GOV.UK</p>
+    </div>
+
+    <div class="guide-body">
+
+      <!-- § 01 About the Regulator -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 01 — About the Regulator</div>
+        <h2>Who is the Regulator of Social Housing?</h2>
+        <p>The Regulator of Social Housing (RSH) is an executive non-departmental public body sponsored by the Ministry of Housing, Communities and Local Government. It sets mandatory standards that all registered social housing providers in England must meet.</p>
+        <p>The regulatory framework was significantly strengthened by the <strong>Social Housing Regulation Act 2023</strong>, which introduced mandatory inspections of all large landlords and brought local authority landlords under the same consumer standards as housing associations for the first time.</p>
+        <div class="guide-quote">"RSH promotes a viable, efficient and well-governed social housing sector able to deliver more and better social homes. We hold registered providers to account so that current and future tenants have safe, quality homes."</div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 02 Assessment Process -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 02 — The Assessment Process</div>
+        <h2>How Providers Are Assessed</h2>
+        <p>RSH uses a combination of planned inspections, annual stability checks and responsive engagement to assess each landlord. Every assessment results in a published regulatory judgement.</p>
+
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div>
+              <div class="guide-step-title">Programmed Inspection</div>
+              <div class="guide-step-body">RSH inspects every large landlord (1,000+ homes) on a four-year cycle. Inspectors review documents, interview officers, board members and tenants, and assess evidence against all consumer standards before issuing a grade.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div>
+              <div class="guide-step-title">Annual Stability Check</div>
+              <div class="guide-step-body">Between inspections, RSH conducts yearly stability checks on all housing associations with 1,000+ homes, reviewing financial data, governance submissions and operational performance to check for emerging risks.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div>
+              <div class="guide-step-title">Responsive Engagement</div>
+              <div class="guide-step-body">If a landlord self-refers a material issue, RSH receives a complaint, or data flags a concern — RSH can engage outside the regular cycle. This can result in a grade change without a full inspection.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div>
+              <div class="guide-step-title">Regulatory Judgement Published</div>
+              <div class="guide-step-body">Following every assessment, RSH publishes its judgement on GOV.UK — including findings, reasons for grades, and what the provider must do to improve. All judgements are publicly accessible.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 10px">The four consumer standards inspected:</p>
+        <div class="guide-standards">
+          <div class="guide-std">
+            <div class="guide-std-icon">🔒</div>
+            <div class="guide-std-title">Safety &amp; Quality Standard</div>
+            <div class="guide-std-body">Fire, electrical &amp; water safety; damp &amp; mould; Decent Homes Standard compliance; timely repairs and maintenance.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">📢</div>
+            <div class="guide-std-title">Transparency, Influence &amp; Accountability Standard</div>
+            <div class="guide-std-body">Treating tenants fairly; meaningful scrutiny opportunities; effective complaints handling; open communication.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">🏘️</div>
+            <div class="guide-std-title">Neighbourhood &amp; Community Standard</div>
+            <div class="guide-std-body">Working with councils, police and partners to tackle anti-social behaviour and hate incidents.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">🏠</div>
+            <div class="guide-std-title">Tenancy Standard</div>
+            <div class="guide-std-body">Offering tenancies appropriate to household needs and compatible with the accommodation's purpose.</div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">⚠️</div>
+          <div class="guide-notice-body"><strong>Local authority landlords</strong> are regulated against the Consumer and Rent Standards only. The Governance and Financial Viability Standard does not apply to councils — this is why LA profiles in this portal show no G or V grades.</div>
+        </div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 03 Grading System -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 03 — Grading System</div>
+        <h2>Understanding the Grade Categories</h2>
+        <p>RSH issues grades across three dimensions: <strong>Consumer (C)</strong>, <strong>Governance (G)</strong> and <strong>Viability (V)</strong>. Each runs 1–4, with 1 being the strongest. Grades are published on GOV.UK and updated after every assessment.</p>
+        <p>The <strong>Consumer grade</strong> is the most visible and impactful measure for tenants. It reflects how well a landlord delivers safe, quality homes and treats residents fairly.</p>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 10px">Consumer Grade · C1 → C4</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c1">C1</div></div>
+            <div>
+              <div class="guide-grade-title">Meeting Standards</div>
+              <div class="guide-grade-body">The landlord is delivering the outcomes of the consumer standards. It identifies issues when they occur and puts things right. Tenants receive the service they are entitled to.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue to review and improve services. C1 is not a licence to stand still.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c2">C2</div></div>
+            <div>
+              <div class="guide-grade-title">Improvement Needed</div>
+              <div class="guide-grade-body">There are some weaknesses in delivering the consumer standards. These are material and, if left unaddressed, are likely to mean the landlord does not meet the standards.</div>
+              <div class="guide-grade-expect">RSH expectation: Develop and share an improvement plan with tenants. Demonstrate weaknesses have been addressed.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c3">C3</div></div>
+            <div>
+              <div class="guide-grade-title">Serious Failings</div>
+              <div class="guide-grade-body">There are serious failings in delivering the consumer standards. Current arrangements are not strong enough to put things right. Tenants are at risk of, or are experiencing, harm.</div>
+              <div class="guide-grade-expect">RSH expectation: Develop a significant-change plan shared with tenants. RSH will engage intensively and require ongoing evidence of improvement.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c4">C4</div></div>
+            <div>
+              <div class="guide-grade-title">Very Serious Failings — Fundamental Change Required</div>
+              <div class="guide-grade-body">Failings are so serious that the landlord must make fundamental changes. It has failed to meet the standards and tenants are experiencing significant harm.</div>
+              <div class="guide-grade-expect">RSH expectation: Intensive engagement. Enforcement action including statutory notices, special measures or management transfer may follow.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 4px">Governance Grade · G1 → G4 <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5)">(Private Registered Providers only)</span></p>
+        <p>Measures whether the board and executive manage risks effectively and demonstrate strong leadership to deliver the landlord's objectives.</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g1">G1</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Governance Requirements</div>
+              <div class="guide-grade-body">Governance arrangements work effectively to identify and manage financial and non-financial risks. The landlord demonstrates strong leadership.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue to review and strengthen governance. RSH expects all landlords to aim for G1.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g2">G2</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Requirements — Improvement Needed</div>
+              <div class="guide-grade-body">Overall meets governance requirements but has weaknesses significant to the delivery of standards outcomes. These must be addressed before they become more serious.</div>
+              <div class="guide-grade-expect">RSH expectation: Identify root causes and put in place a comprehensive, timely improvement plan.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g3">G3</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Requirements</div>
+              <div class="guide-grade-body">The landlord does not meet RSH's governance requirements. There are issues of serious regulatory concern. The landlord is at risk of being unable to deliver its objectives.</div>
+              <div class="guide-grade-expect">RSH expectation: Active engagement with RSH. A formal improvement plan must be in place with regular evidence of progress.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g4">G4</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Requirements — Regulatory Intervention</div>
+              <div class="guide-grade-body">Serious governance failures. RSH is actively intervening and may take enforcement action due to the severity of the failures.</div>
+              <div class="guide-grade-expect">RSH expectation: Subject to active regulatory intervention. Enforcement including statutory notices or management transfer.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 4px">Viability Grade · V1 → V4 <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5)">(Private Registered Providers only)</span></p>
+        <p>Measures financial strength — whether the landlord can meet its financial obligations now and in the future.</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v1">V1</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Viability Requirements — Strong Position</div>
+              <div class="guide-grade-body">Meets viability requirements with financial capacity to deal with a wide range of adverse scenarios. Strong financial health across all key metrics.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue prudent financial management. Maintain strong evidence base for financial plans.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v2">V2</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Requirements — Manage Material Risks</div>
+              <div class="guide-grade-body">Meets viability requirements and can deal with a reasonable range of adverse scenarios, but needs to manage material risks to ensure continued compliance.</div>
+              <div class="guide-grade-expect">RSH expectation: Active monitoring of financial risks. May be regraded at next review depending on progress.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v3">V3</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Viability Requirements</div>
+              <div class="guide-grade-body">Does not meet viability requirements. Serious regulatory concern around whether long-term viability risks are being appropriately managed.</div>
+              <div class="guide-grade-expect">RSH expectation: Intensive financial engagement with RSH. Immediate remediation plan required.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v4">V4</div></div>
+            <div>
+              <div class="guide-grade-title">Serious Financial Difficulty — Regulatory Intervention</div>
+              <div class="guide-grade-body">Most likely in serious financial difficulty. RSH is working with the landlord and others to remedy the situation using regulatory powers.</div>
+              <div class="guide-grade-expect">RSH expectation: Active regulatory intervention. RSH may appoint managers or use statutory powers to stabilise the organisation.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">📌</div>
+          <div class="guide-notice-body"><strong>For-profit providers:</strong> where grades are shown with an asterisk (e.g. C1*, G2*) this indicates a for-profit registered provider. The regulatory framework applies in the same way.</div>
+        </div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 04 Consequences -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 04 — Consequences of Low Grades</div>
+        <h2>What Happens When a Provider Receives a Low Grade?</h2>
+        <p>The consequences of a low grade are graduated and proportionate. RSH first seeks improvement through engagement, escalating to enforcement only where necessary.</p>
+        <div class="guide-consequences">
+          <div class="guide-con" style="background:rgba(34,197,94,.12);border-color:#22c55e">
+            <div class="guide-con-grade" style="color:#86efac">C2 / G2 / V2 — Improvement Required</div>
+            <div class="guide-con-body">RSH publishes judgement publicly · Landlord must develop a formal improvement plan · Plan must be shared with tenants · Progress reviewed at next assessment</div>
+          </div>
+          <div class="guide-con" style="background:rgba(245,158,11,.12);border-color:#f59e0b">
+            <div class="guide-con-grade" style="color:#fcd34d">C3 / G3 / V3 — Intensive Engagement</div>
+            <div class="guide-con-body">RSH initiates intensive regulatory engagement · Frequent reporting and evidence requirements · Landlord may be placed under heightened scrutiny · Inspectors may revisit</div>
+          </div>
+          <div class="guide-con" style="background:rgba(239,68,68,.12);border-color:#ef4444">
+            <div class="guide-con-grade" style="color:#fca5a5">C4 / G4 / V4 — Regulatory Intervention</div>
+            <div class="guide-con-body">RSH may issue a Statutory Notice · RSH can appoint an Additional Appointee (surveyor/manager) · Management transfer possible · Enforcement action on GOV.UK</div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">⚠️</div>
+          <div class="guide-notice-body"><strong>Self-Referral Obligation:</strong> landlords have an active obligation to self-refer to RSH when they identify a material issue. Failure to self-refer when required is itself a regulatory concern and may result in a lower grade.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="guide-footer">
+      Source: Regulator of Social Housing — GOV.UK &nbsp;·&nbsp; gov.uk/regulatory-judgements-a-to-z &nbsp;·&nbsp; April 2026
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
+
+<!-- INSIGHTS PANEL -->
+<div id="insights-overlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,42,0.75);z-index:100;overflow-y:auto;padding:40px 20px">
+  <div style="max-width:900px;margin:0 auto;background:white;border-radius:16px;overflow:hidden">
+    <div style="background:var(--navy);padding:28px 36px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:'Poppins',sans-serif;font-size:26px;color:white">Sector Insights</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">What the data shows across 290 registered providers</div>
+      </div>
+      <button onclick="document.getElementById('insights-overlay').style.display='none'" style="background:rgba(255,255,255,0.1);border:none;color:white;font-size:22px;width:40px;height:40px;border-radius:8px;cursor:pointer;font-family:sans-serif">&#x2715;</button>
+    </div>
+    <div style="padding:32px 36px">
+
+      <div style="margin-bottom:32px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:8px">Grade distribution<span style="flex:1;height:1px;background:var(--grey2)"></span></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+          <div style="background:#f0fdf4;border-radius:10px;padding:16px;border-top:3px solid #22c55e">
+            <div style="font-size:32px;font-weight:700;color:#15803d;font-family:'Poppins',sans-serif">58</div>
+            <div style="font-size:13px;font-weight:600;color:#15803d;margin-bottom:4px">C1 &#8212; Meeting standards</div>
+            <div style="font-size:12px;color:var(--text3)">20% of all providers</div>
+          </div>
+          <div style="background:#eff6ff;border-radius:10px;padding:16px;border-top:3px solid #3b82f6">
+            <div style="font-size:32px;font-weight:700;color:#1d4ed8;font-family:'Poppins',sans-serif">86</div>
+            <div style="font-size:13px;font-weight:600;color:#1d4ed8;margin-bottom:4px">C2 &#8212; Needs improvement</div>
+            <div style="font-size:12px;color:var(--text3)">30% of all providers</div>
+          </div>
+          <div style="background:#fffbeb;border-radius:10px;padding:16px;border-top:3px solid #f59e0b">
+            <div style="font-size:32px;font-weight:700;color:#b45309;font-family:'Poppins',sans-serif">41</div>
+            <div style="font-size:13px;font-weight:600;color:#b45309;margin-bottom:4px">C3 &#8212; Serious failings</div>
+            <div style="font-size:12px;color:var(--text3)">14% of all providers</div>
+          </div>
+          <div style="background:#fff1f2;border-radius:10px;padding:16px;border-top:3px solid #ef4444">
+            <div style="font-size:32px;font-weight:700;color:#b91c1c;font-family:'Poppins',sans-serif">7</div>
+            <div style="font-size:13px;font-weight:600;color:#b91c1c;margin-bottom:4px">C4 &#8212; Fundamental change</div>
+            <div style="font-size:12px;color:var(--text3)">2% of all providers</div>
+          </div>
+        </div>
+        <div style="background:var(--grey);border-radius:8px;padding:12px 16px;margin-top:12px;font-size:13px;color:var(--text3)">
+          98 providers (34%) have not yet received a consumer grade &#8212; RSH inspections are ongoing across the sector.
+        </div>
+      </div>
+
+      <div style="margin-bottom:32px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+          <span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-size:11px">C1</span> What characterises top-rated providers
+          <span style="flex:1;height:1px;background:var(--grey2)"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div style="background:#f0fdf4;border-radius:9px;padding:16px 18px">
+            <div style="font-size:28px;font-weight:700;color:#15803d;font-family:'Poppins',sans-serif">98%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">of C1-rated PRPs also hold a <strong>G1 governance grade</strong> &#8212; strong governance and strong consumer outcomes go together almost universally</div>
+          </div>
+          <div style="background:#f0fdf4;border-radius:9px;padding:16px 18px">
+            <div style="font-size:28px;font-weight:700;color:#15803d;font-family:'Poppins',sans-serif">100%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">of C1-rated PRPs hold a <strong>V1 or V2 viability grade</strong> &#8212; no C1 provider has a viability concern</div>
+          </div>
+          <div style="background:#f0fdf4;border-radius:9px;padding:16px 18px">
+            <div style="font-size:28px;font-weight:700;color:#15803d;font-family:'Poppins',sans-serif">60%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">of C1 grades were awarded following a full <strong>RSH inspection</strong> &#8212; the most rigorous form of regulatory engagement</div>
+          </div>
+          <div style="background:#f0fdf4;border-radius:9px;padding:16px 18px">
+            <div style="font-size:28px;font-weight:700;color:#15803d;font-family:'Poppins',sans-serif">58</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">providers across England currently hold C1 &#8212; <strong>48 Private Registered Providers</strong> and <strong>10 local authorities</strong></div>
+          </div>
+        </div>
+        <div style="background:#f0fdf4;border-radius:9px;padding:16px 18px;font-size:13px;color:var(--text2);line-height:1.7;border-left:3px solid #22c55e">
+          <strong>What C1 means in practice:</strong> RSH found the provider proactively identifies issues that may affect tenants and puts plans in place to fix them. Inspections reward a <strong>culture of continuous improvement</strong> &#8212; reliable data, clear accountability, strong board oversight, and tenants who can genuinely influence services.
+        </div>
+      </div>
+
+      <div style="margin-bottom:32px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+          <span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:4px;font-size:11px">C3 / C4</span> Common failure patterns
+          <span style="flex:1;height:1px;background:var(--grey2)"></span>
+        </div>
+        <div style="background:var(--grey);border-radius:10px;padding:20px 22px;margin-bottom:14px">
+          <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:16px">Issues cited across all 48 C3/C4 providers</div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2);width:230px;flex-shrink:0">Health &amp; safety compliance</span>
+            <div style="flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden">
+              <div style="width:94%;height:100%;background:#ef4444;border-radius:5px"></div>
+            </div>
+            <span style="font-size:12px;font-weight:600;color:var(--text2);width:36px;text-align:right">94%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2);width:230px;flex-shrink:0">Stock condition / data quality</span>
+            <div style="flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden">
+              <div style="width:81%;height:100%;background:#f97316;border-radius:5px"></div>
+            </div>
+            <span style="font-size:12px;font-weight:600;color:var(--text2);width:36px;text-align:right">81%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2);width:230px;flex-shrink:0">Repairs &amp; maintenance</span>
+            <div style="flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden">
+              <div style="width:46%;height:100%;background:#f59e0b;border-radius:5px"></div>
+            </div>
+            <span style="font-size:12px;font-weight:600;color:var(--text2);width:36px;text-align:right">46%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="font-size:12px;color:var(--text2);width:230px;flex-shrink:0">Tenant engagement</span>
+            <div style="flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden">
+              <div style="width:42%;height:100%;background:#eab308;border-radius:5px"></div>
+            </div>
+            <span style="font-size:12px;font-weight:600;color:var(--text2);width:36px;text-align:right">42%</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:#fff1f2;border-radius:9px;padding:16px 18px;border-left:3px solid #ef4444">
+            <div style="font-size:28px;font-weight:700;color:#b91c1c;font-family:'Poppins',sans-serif">94%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">of C3/C4 providers had <strong>health and safety compliance</strong> cited &#8212; the single most consistent failure factor across the sector</div>
+          </div>
+          <div style="background:#fff1f2;border-radius:9px;padding:16px 18px;border-left:3px solid #f97316">
+            <div style="font-size:28px;font-weight:700;color:#b91c1c;font-family:'Poppins',sans-serif">88%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">had <strong>data quality or stock condition data</strong> cited &#8212; rising to <strong>100%</strong> among all 7 C4-rated providers</div>
+          </div>
+          <div style="background:#fff1f2;border-radius:9px;padding:16px 18px;border-left:3px solid #f59e0b">
+            <div style="font-size:28px;font-weight:700;color:#b91c1c;font-family:'Poppins',sans-serif">42%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">had <strong>inadequate tenant engagement</strong> or lack of meaningful scrutiny opportunities cited in their judgement</div>
+          </div>
+          <div style="background:#fff1f2;border-radius:9px;padding:16px 18px;border-left:3px solid #ef4444">
+            <div style="font-size:28px;font-weight:700;color:#b91c1c;font-family:'Poppins',sans-serif">42%</div>
+            <div style="font-size:13px;color:var(--text2);margin-top:4px">of C3/C4 grades came via <strong>responsive engagement</strong> &#8212; RSH stepped in proactively rather than through a routine inspection</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--navy);border-radius:10px;padding:22px 26px;color:white">
+        <div style="font-family:'Poppins',sans-serif;font-size:18px;margin-bottom:10px">The RSH data tells a clear story</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.8">
+          Providers achieving C1 consistently demonstrate strong governance, reliable data about their homes, and meaningful tenant involvement. Providers at C3 and C4 almost universally share the same failure cluster: <strong style="color:white">they don&#8217;t know the true condition of their stock, their health and safety compliance is weak, and tenants have limited ability to hold them to account.</strong> The data suggests these three things are deeply interconnected &#8212; poor data leads to poor compliance, which leads to poor outcomes.
+        </div>
+      </div>
+
+
+      <!-- TSM Trends section -->
+      <div style="padding:24px 36px;border-top:1px solid var(--grey2)">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:8px">TSM Performance by Consumer Grade<span style="flex:1;height:1px;background:var(--grey2);display:inline-block"></span></div>
+        <p style="font-size:12px;color:var(--text3);margin-bottom:16px;line-height:1.6">
+          Average Tenant Satisfaction Measures scores broken down by RSH consumer grade — showing where C3/C4 providers consistently underperform relative to C1.
+        </p>
+        <div id="tsm-trends-wrap"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Assessment Guide Modal ───────────────────────────────────────────── -->
+<div id="guide-overlay" onclick="if(event.target===this)closeGuide()">
+  <div id="guide-panel">
+
+    <div class="guide-header">
+      <button class="guide-close" onclick="closeGuide()">✕</button>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px">Regulator of Social Housing · England</div>
+      <h1>Regulatory Assessment Framework</h1>
+      <p>A guide to how social housing providers are assessed, graded and held to account · 290 registered providers · Source: RSH GOV.UK</p>
+    </div>
+
+    <div class="guide-body">
+
+      <!-- § 01 About the Regulator -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 01 — About the Regulator</div>
+        <h2>Who is the Regulator of Social Housing?</h2>
+        <p>The Regulator of Social Housing (RSH) is an executive non-departmental public body sponsored by the Ministry of Housing, Communities and Local Government. It sets mandatory standards that all registered social housing providers in England must meet.</p>
+        <p>The regulatory framework was significantly strengthened by the <strong>Social Housing Regulation Act 2023</strong>, which introduced mandatory inspections of all large landlords and brought local authority landlords under the same consumer standards as housing associations for the first time.</p>
+        <div class="guide-quote">"RSH promotes a viable, efficient and well-governed social housing sector able to deliver more and better social homes. We hold registered providers to account so that current and future tenants have safe, quality homes."</div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 02 Assessment Process -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 02 — The Assessment Process</div>
+        <h2>How Providers Are Assessed</h2>
+        <p>RSH uses a combination of planned inspections, annual stability checks and responsive engagement to assess each landlord. Every assessment results in a published regulatory judgement.</p>
+
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div>
+              <div class="guide-step-title">Programmed Inspection</div>
+              <div class="guide-step-body">RSH inspects every large landlord (1,000+ homes) on a four-year cycle. Inspectors review documents, interview officers, board members and tenants, and assess evidence against all consumer standards before issuing a grade.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div>
+              <div class="guide-step-title">Annual Stability Check</div>
+              <div class="guide-step-body">Between inspections, RSH conducts yearly stability checks on all housing associations with 1,000+ homes, reviewing financial data, governance submissions and operational performance to check for emerging risks.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div>
+              <div class="guide-step-title">Responsive Engagement</div>
+              <div class="guide-step-body">If a landlord self-refers a material issue, RSH receives a complaint, or data flags a concern — RSH can engage outside the regular cycle. This can result in a grade change without a full inspection.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div>
+              <div class="guide-step-title">Regulatory Judgement Published</div>
+              <div class="guide-step-body">Following every assessment, RSH publishes its judgement on GOV.UK — including findings, reasons for grades, and what the provider must do to improve. All judgements are publicly accessible.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 10px">The four consumer standards inspected:</p>
+        <div class="guide-standards">
+          <div class="guide-std">
+            <div class="guide-std-icon">🔒</div>
+            <div class="guide-std-title">Safety &amp; Quality Standard</div>
+            <div class="guide-std-body">Fire, electrical &amp; water safety; damp &amp; mould; Decent Homes Standard compliance; timely repairs and maintenance.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">📢</div>
+            <div class="guide-std-title">Transparency, Influence &amp; Accountability Standard</div>
+            <div class="guide-std-body">Treating tenants fairly; meaningful scrutiny opportunities; effective complaints handling; open communication.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">🏘️</div>
+            <div class="guide-std-title">Neighbourhood &amp; Community Standard</div>
+            <div class="guide-std-body">Working with councils, police and partners to tackle anti-social behaviour and hate incidents.</div>
+          </div>
+          <div class="guide-std">
+            <div class="guide-std-icon">🏠</div>
+            <div class="guide-std-title">Tenancy Standard</div>
+            <div class="guide-std-body">Offering tenancies appropriate to household needs and compatible with the accommodation's purpose.</div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">⚠️</div>
+          <div class="guide-notice-body"><strong>Local authority landlords</strong> are regulated against the Consumer and Rent Standards only. The Governance and Financial Viability Standard does not apply to councils — this is why LA profiles in this portal show no G or V grades.</div>
+        </div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 03 Grading System -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 03 — Grading System</div>
+        <h2>Understanding the Grade Categories</h2>
+        <p>RSH issues grades across three dimensions: <strong>Consumer (C)</strong>, <strong>Governance (G)</strong> and <strong>Viability (V)</strong>. Each runs 1–4, with 1 being the strongest. Grades are published on GOV.UK and updated after every assessment.</p>
+        <p>The <strong>Consumer grade</strong> is the most visible and impactful measure for tenants. It reflects how well a landlord delivers safe, quality homes and treats residents fairly.</p>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 10px">Consumer Grade · C1 → C4</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c1">C1</div></div>
+            <div>
+              <div class="guide-grade-title">Meeting Standards</div>
+              <div class="guide-grade-body">The landlord is delivering the outcomes of the consumer standards. It identifies issues when they occur and puts things right. Tenants receive the service they are entitled to.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue to review and improve services. C1 is not a licence to stand still.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c2">C2</div></div>
+            <div>
+              <div class="guide-grade-title">Improvement Needed</div>
+              <div class="guide-grade-body">There are some weaknesses in delivering the consumer standards. These are material and, if left unaddressed, are likely to mean the landlord does not meet the standards.</div>
+              <div class="guide-grade-expect">RSH expectation: Develop and share an improvement plan with tenants. Demonstrate weaknesses have been addressed.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c3">C3</div></div>
+            <div>
+              <div class="guide-grade-title">Serious Failings</div>
+              <div class="guide-grade-body">There are serious failings in delivering the consumer standards. Current arrangements are not strong enough to put things right. Tenants are at risk of, or are experiencing, harm.</div>
+              <div class="guide-grade-expect">RSH expectation: Develop a significant-change plan shared with tenants. RSH will engage intensively and require ongoing evidence of improvement.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp c4">C4</div></div>
+            <div>
+              <div class="guide-grade-title">Very Serious Failings — Fundamental Change Required</div>
+              <div class="guide-grade-body">Failings are so serious that the landlord must make fundamental changes. It has failed to meet the standards and tenants are experiencing significant harm.</div>
+              <div class="guide-grade-expect">RSH expectation: Intensive engagement. Enforcement action including statutory notices, special measures or management transfer may follow.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 4px">Governance Grade · G1 → G4 <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5)">(Private Registered Providers only)</span></p>
+        <p>Measures whether the board and executive manage risks effectively and demonstrate strong leadership to deliver the landlord's objectives.</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g1">G1</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Governance Requirements</div>
+              <div class="guide-grade-body">Governance arrangements work effectively to identify and manage financial and non-financial risks. The landlord demonstrates strong leadership.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue to review and strengthen governance. RSH expects all landlords to aim for G1.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g2">G2</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Requirements — Improvement Needed</div>
+              <div class="guide-grade-body">Overall meets governance requirements but has weaknesses significant to the delivery of standards outcomes. These must be addressed before they become more serious.</div>
+              <div class="guide-grade-expect">RSH expectation: Identify root causes and put in place a comprehensive, timely improvement plan.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g3">G3</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Requirements</div>
+              <div class="guide-grade-body">The landlord does not meet RSH's governance requirements. There are issues of serious regulatory concern. The landlord is at risk of being unable to deliver its objectives.</div>
+              <div class="guide-grade-expect">RSH expectation: Active engagement with RSH. A formal improvement plan must be in place with regular evidence of progress.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp g4">G4</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Requirements — Regulatory Intervention</div>
+              <div class="guide-grade-body">Serious governance failures. RSH is actively intervening and may take enforcement action due to the severity of the failures.</div>
+              <div class="guide-grade-expect">RSH expectation: Subject to active regulatory intervention. Enforcement including statutory notices or management transfer.</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:#ffffff;margin:18px 0 4px">Viability Grade · V1 → V4 <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.5)">(Private Registered Providers only)</span></p>
+        <p>Measures financial strength — whether the landlord can meet its financial obligations now and in the future.</p>
+        <div class="guide-grades">
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v1">V1</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Viability Requirements — Strong Position</div>
+              <div class="guide-grade-body">Meets viability requirements with financial capacity to deal with a wide range of adverse scenarios. Strong financial health across all key metrics.</div>
+              <div class="guide-grade-expect">RSH expectation: Continue prudent financial management. Maintain strong evidence base for financial plans.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v2">V2</div></div>
+            <div>
+              <div class="guide-grade-title">Meets Requirements — Manage Material Risks</div>
+              <div class="guide-grade-body">Meets viability requirements and can deal with a reasonable range of adverse scenarios, but needs to manage material risks to ensure continued compliance.</div>
+              <div class="guide-grade-expect">RSH expectation: Active monitoring of financial risks. May be regraded at next review depending on progress.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v3">V3</div></div>
+            <div>
+              <div class="guide-grade-title">Does Not Meet Viability Requirements</div>
+              <div class="guide-grade-body">Does not meet viability requirements. Serious regulatory concern around whether long-term viability risks are being appropriately managed.</div>
+              <div class="guide-grade-expect">RSH expectation: Intensive financial engagement with RSH. Immediate remediation plan required.</div>
+            </div>
+          </div>
+          <div class="guide-grade-row">
+            <div><div class="guide-grade-pill gp v4">V4</div></div>
+            <div>
+              <div class="guide-grade-title">Serious Financial Difficulty — Regulatory Intervention</div>
+              <div class="guide-grade-body">Most likely in serious financial difficulty. RSH is working with the landlord and others to remedy the situation using regulatory powers.</div>
+              <div class="guide-grade-expect">RSH expectation: Active regulatory intervention. RSH may appoint managers or use statutory powers to stabilise the organisation.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">📌</div>
+          <div class="guide-notice-body"><strong>For-profit providers:</strong> where grades are shown with an asterisk (e.g. C1*, G2*) this indicates a for-profit registered provider. The regulatory framework applies in the same way.</div>
+        </div>
+      </div>
+
+      <div class="guide-divider"></div>
+
+      <!-- § 04 Consequences -->
+      <div class="guide-sec">
+        <div class="guide-sec-num">§ 04 — Consequences of Low Grades</div>
+        <h2>What Happens When a Provider Receives a Low Grade?</h2>
+        <p>The consequences of a low grade are graduated and proportionate. RSH first seeks improvement through engagement, escalating to enforcement only where necessary.</p>
+        <div class="guide-consequences">
+          <div class="guide-con" style="background:rgba(34,197,94,.12);border-color:#22c55e">
+            <div class="guide-con-grade" style="color:#86efac">C2 / G2 / V2 — Improvement Required</div>
+            <div class="guide-con-body">RSH publishes judgement publicly · Landlord must develop a formal improvement plan · Plan must be shared with tenants · Progress reviewed at next assessment</div>
+          </div>
+          <div class="guide-con" style="background:rgba(245,158,11,.12);border-color:#f59e0b">
+            <div class="guide-con-grade" style="color:#fcd34d">C3 / G3 / V3 — Intensive Engagement</div>
+            <div class="guide-con-body">RSH initiates intensive regulatory engagement · Frequent reporting and evidence requirements · Landlord may be placed under heightened scrutiny · Inspectors may revisit</div>
+          </div>
+          <div class="guide-con" style="background:rgba(239,68,68,.12);border-color:#ef4444">
+            <div class="guide-con-grade" style="color:#fca5a5">C4 / G4 / V4 — Regulatory Intervention</div>
+            <div class="guide-con-body">RSH may issue a Statutory Notice · RSH can appoint an Additional Appointee (surveyor/manager) · Management transfer possible · Enforcement action on GOV.UK</div>
+          </div>
+        </div>
+
+        <div class="guide-notice">
+          <div class="guide-notice-icon">⚠️</div>
+          <div class="guide-notice-body"><strong>Self-Referral Obligation:</strong> landlords have an active obligation to self-refer to RSH when they identify a material issue. Failure to self-refer when required is itself a regulatory concern and may result in a lower grade.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="guide-footer">
+      Source: Regulator of Social Housing — GOV.UK &nbsp;·&nbsp; gov.uk/regulatory-judgements-a-to-z &nbsp;·&nbsp; April 2026
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
 </body>
 </html>
