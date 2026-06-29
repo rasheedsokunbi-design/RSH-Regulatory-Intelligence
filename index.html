@@ -1277,7 +1277,6 @@ const LA_HRA_AVG = {"dwelling_rents": 53929.4, "non_dwelling_rents": 1113.9, "to
 const S114_COUNCILS = {"Birmingham City Council": 2023, "Nottingham City Council": 2023, "Woking Borough Council": 2023, "Thurrock Council": 2022, "Croydon London Borough Council": 2020, "Slough Borough Council": 2021, "Bradford Metropolitan District Council": 2024};
 
 
-
 let leafletMap = null;
 let mapMarkers = [];
 let currentView = 'list';
@@ -3067,8 +3066,6 @@ function finBar(val, avg, maxVal, lowerBetter, suffix) {
   return `<div class="fin-bar-track"><div class="fin-bar-fill" style="width:${pct}%;background:${col}"></div>${avgLine}</div>`;
 }
 
-
-
 function hraStatCard(val, label, sub, rag) {
   const col = rag || '#035341';
   return `<div style="background:var(--grey);border-radius:10px;padding:13px 15px;border-left:3px solid ${col}">
@@ -3451,19 +3448,44 @@ const TSM_MGMT_LABELS = {
 // Metrics where lower is better
 const TSM_LOWER_BETTER = new Set(['rp01','nm01','ch01_1','ch01_2']);
 
-function tsmRag(val, avg, lowerBetter) {
-  if(val === null || avg === null) return 'neutral';
+const TSM_SAFETY_METRICS = new Set(['bs01','bs02','bs03','bs04','bs05']);
+const TSM_COMPLAINT_RATE = new Set(['ch02_1','ch02_2']);
+const TSM_REPAIRS_ONTIME = new Set(['rp02_1','rp02_2']);
+
+function tsmRag(val, avg, lowerBetter, metricKey) {
+  if(val === null) return 'neutral';
+  if(metricKey && TSM_SAFETY_METRICS.has(metricKey)) {
+    if(val >= 95) return 'green';
+    if(val >= 90) return 'amber';
+    return 'red';
+  }
+  if(metricKey && TSM_COMPLAINT_RATE.has(metricKey)) {
+    if(val >= 90) return 'green';
+    if(val >= 75) return 'amber';
+    return 'red';
+  }
+  if(metricKey && TSM_REPAIRS_ONTIME.has(metricKey)) {
+    if(val >= 85) return 'green';
+    if(val >= 70) return 'amber';
+    return 'red';
+  }
+  if(metricKey === 'rp01') {
+    if(val <= 2) return 'green';
+    if(val <= 8) return 'amber';
+    return 'red';
+  }
+  if(avg === null) return 'neutral';
   const diff = lowerBetter ? avg - val : val - avg;
   if(diff >= 5) return 'green';
   if(diff <= -5) return 'red';
   return 'amber';
 }
 
-function tsmBar(val, avg, maxVal, lowerBetter, gradeAvg, grade) {
+function tsmBar(val, avg, maxVal, lowerBetter, gradeAvg, grade, metricKey) {
   if(val === null) return '<div class="tsm-bar-wrap"><span style="font-size:11px;color:var(--text3)">No data</span></div>';
   const pct = Math.min(100, (val / maxVal) * 100);
   const avgPct = Math.min(100, (avg / maxVal) * 100);
-  const rag = tsmRag(val, avg, lowerBetter);
+  const rag = tsmRag(val, avg, lowerBetter, metricKey);
   const col = rag==='green'?'#22c55e': rag==='red'?'#ef4444':'#f59e0b';
   // Grade avg line (same grade average)
   const gradeAvgPct = (gradeAvg !== null && gradeAvg !== undefined) ? Math.min(100, (gradeAvg / maxVal) * 100) : null;
@@ -3495,7 +3517,7 @@ function renderTSMTab(p) {
 
   // ── Headline satisfaction card ────────────────────────────────────────────
   if(perc && perc.tp01 !== null) {
-    const rag = tsmRag(perc.tp01, TSM_PERC_AVG.tp01, false);
+    const rag = tsmRag(perc.tp01, TSM_PERC_AVG.tp01, false, 'tp01');
     const ragClass = `tsm-badge-${rag}`;
     const ragLabel = rag==='green'?'Above avg': rag==='red'?'Below avg':'Near avg';
     const borderCol = rag==='green'?'#22c55e': rag==='red'?'#ef4444':'#f59e0b';
@@ -3525,14 +3547,14 @@ function renderTSMTab(p) {
     for(const [key, label] of Object.entries(TSM_PERC_LABELS)) {
       const val = perc[key];
       const avg = TSM_PERC_AVG[key];
-      const rag = tsmRag(val, avg, false);
+      const rag = tsmRag(val, avg, false, key);
       const valCol = rag==='green'?'#15803d': rag==='red'?'#b91c1c':'#854d0e';
       const _myGN = gradeNum(p.consumer_grade);
       const gradeAvgP = _myGN && typeof TSM_GRADE_AVGS !== 'undefined' ? (TSM_GRADE_AVGS[p.consumer_grade.replace('*','').slice(0,2)]?.perc[key] || null) : null;
       const myGrade = p.consumer_grade.replace('*','').slice(0,2);
       out += `<div class="tsm-row">
         <div class="tsm-label">${label}</div>
-        ${tsmBar(val, avg, 100, false, gradeAvgP, myGrade)}
+        ${tsmBar(val, avg, 100, false, gradeAvgP, myGrade, key)}
         <div class="tsm-val" style="color:${val!==null?valCol:'var(--text3)'}">${val!==null?val+'%':'—'}</div>
         <div class="tsm-nat">${avg!==null?avg+'%':'—'}</div>
       </div>`;
@@ -3555,14 +3577,14 @@ function renderTSMTab(p) {
         const val = mgmt[key];
         const avg = TSM_MGMT_AVG[key];
         const lb = TSM_LOWER_BETTER.has(key);
-        const rag = tsmRag(val, avg, lb);
+        const rag = tsmRag(val, avg, lb, key);
         const valCol = rag==='green'?'#15803d': rag==='red'?'#b91c1c':'#854d0e';
         const isPercent = !['nm01','ch01_1','ch01_2'].includes(key);
         const suffix = isPercent ? '%' : '';
         const maxVal = isPercent ? 100 : Math.max((avg||0)*3, (val||0)*1.5, 1);
         s += `<div class="tsm-row">
           <div class="tsm-label">${TSM_MGMT_LABELS[key]}</div>
-          ${tsmBar(val, avg, maxVal, lb)}
+          ${tsmBar(val, avg, maxVal, lb, null, null, key)}
           <div class="tsm-val" style="color:${val!==null?valCol:'var(--text3)'}">${val!==null?val+suffix:'—'}</div>
           <div class="tsm-nat">${avg!==null?avg+suffix:'—'}</div>
         </div>`;
