@@ -1211,6 +1211,19 @@ html{font-family:'Poppins',sans-serif;font-size:16px;color:var(--text);backgroun
       <button class="fbtn" data-f="concern">G3/G4 or V3/V4</button>
       <button class="fbtn" data-f="unassessed">Not yet assessed</button>
     </div>
+    <div class="filter-row" id="region-filter-row" style="margin-top:8px">
+      <button class="fbtn active" data-r="all">All regions</button>
+      <button class="fbtn" data-r="London">London</button>
+      <button class="fbtn" data-r="South East">South East</button>
+      <button class="fbtn" data-r="South West">South West</button>
+      <button class="fbtn" data-r="East of England">East of England</button>
+      <button class="fbtn" data-r="East Midlands">East Midlands</button>
+      <button class="fbtn" data-r="West Midlands">West Midlands</button>
+      <button class="fbtn" data-r="Yorkshire and the Humber">Yorkshire</button>
+      <button class="fbtn" data-r="North West">North West</button>
+      <button class="fbtn" data-r="North East">North East</button>
+      <button class="fbtn" data-r="National">National / Multiple</button>
+    </div>
   </div>
 </div>
 <div id="stats-bar" style="cursor:default">
@@ -1280,6 +1293,7 @@ const LA_PRP_PRESENCE = {"00MS": {"t": 10633, "n": 17, "p": [["LH0032", "Hyde Ho
 
 
 
+
 let leafletMap = null;
 let mapMarkers = [];
 let currentView = 'list';
@@ -1343,6 +1357,7 @@ document.getElementById('s-na').textContent=stats.na;
 
 // Filter state
 let currentFilter='all';
+let currentRegion='all';
 let currentSearch='';
 let selectedIdx=null;
 
@@ -1351,6 +1366,11 @@ function applyFilters(){
   return DATA.filter(p=>{
     // search
     if(q&&!p.name.toLowerCase().includes(q)&&!p.reg_code.toLowerCase().includes(q))return false;
+    // region filter
+    if(currentRegion!=='all'){
+      const r=(p.region||'').replace('South Wst','South West').trim();
+      if(r!==currentRegion)return false;
+    }
     // type filter
     if(currentFilter==='prp'&&p.type!=='Private Registered Provider')return false;
     if(currentFilter==='la'&&p.type!=='Local Authority')return false;
@@ -1647,10 +1667,20 @@ document.getElementById('search-input').addEventListener('input',e=>{
   searchTimer=setTimeout(()=>{currentSearch=e.target.value;renderList();},150);
 });
 
-// Filter buttons
-document.querySelectorAll('.fbtn').forEach(btn=>{
+// Region filter buttons
+document.getElementById('region-filter-row').querySelectorAll('.fbtn').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('region-filter-row').querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRegion=btn.dataset.r;
+    renderList();
+  });
+});
+
+// Filter buttons
+document.querySelectorAll('.filter-row:not(#region-filter-row) .fbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-row:not(#region-filter-row) .fbtn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     currentFilter=btn.dataset.f;
     renderList();
