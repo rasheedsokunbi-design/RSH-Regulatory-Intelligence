@@ -19,7 +19,7 @@ rsh-portal/
 │   └── template.html              ← Portal HTML/CSS/JS (do not edit data here)
 ├── output/
 │   └── index.html                 ← Generated file — deploy this
-├── build.py                       ← Run this to regenerate the portal
+├── build_new.py                       ← Run this to regenerate the portal
 └── README.md
 ```
 
