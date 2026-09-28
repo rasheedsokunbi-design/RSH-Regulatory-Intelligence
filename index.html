@@ -2485,6 +2485,7 @@ function renderMapMarkers(){
   mapMarkers.forEach(m=>leafletMap.removeLayer(m));
   mapMarkers = [];
 
+
   const filtered = applyFilters();
 
   filtered.forEach(p=>{
@@ -2519,7 +2520,13 @@ function renderMapMarkers(){
     marker.addTo(leafletMap);
     mapMarkers.push(marker);
   });
+
+  if(mapMarkers.length > 0){
+    const group = _Leaflet.featureGroup(mapMarkers);
+    leafletMap.fitBounds(group.getBounds(), {padding:[40,40], maxZoom:8});
+  }
 }
+
 
 
 // ── DG Cities service recommendation ──────────────────────────────────────────
