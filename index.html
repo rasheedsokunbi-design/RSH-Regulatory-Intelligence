@@ -2460,7 +2460,6 @@ function setView(view){
     main.classList.add('map-mode');
     initMap();
     renderMapMarkers();
-    setTimeout(()=>{ if(leafletMap) leafletMap.invalidateSize(); }, 50);
   } else {
     mapBtn.style.background='transparent'; mapBtn.style.color='var(--text2)';
     listBtn.style.background='#035341';    listBtn.style.color='white';
@@ -2474,9 +2473,8 @@ function initMap(){
   if(leafletMap) return;
   leafletMap = _Leaflet.map('rmap', {scrollWheelZoom:true}).setView([52.9, -1.5], 6);
   _Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19,
-    subdomains: 'abcd',
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+    maxZoom: 19, subdomains: 'abcd',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
   }).addTo(leafletMap);
 }
 
@@ -2484,7 +2482,6 @@ function renderMapMarkers(){
   if(!leafletMap) return;
   mapMarkers.forEach(m=>leafletMap.removeLayer(m));
   mapMarkers = [];
-
 
   const filtered = applyFilters();
 
@@ -2521,12 +2518,16 @@ function renderMapMarkers(){
     mapMarkers.push(marker);
   });
 
-  if(mapMarkers.length > 0){
-    const group = _Leaflet.featureGroup(mapMarkers);
-    leafletMap.fitBounds(group.getBounds(), {padding:[40,40], maxZoom:8});
+  if(mapMarkers.length>0){
+    setTimeout(()=>{
+      if(leafletMap){
+        leafletMap.invalidateSize();
+        const g=_Leaflet.featureGroup(mapMarkers);
+        leafletMap.fitBounds(g.getBounds(),{padding:[40,40],maxZoom:8});
+      }
+    }, 200);
   }
 }
-
 
 
 // ── DG Cities service recommendation ──────────────────────────────────────────
@@ -3838,8 +3839,8 @@ function renderFootprintMap(las) {
   footprintMapInstance = _Leaflet.map('footprint-map', {scrollWheelZoom: false});
   footprintMapSelectionLayer.addTo(footprintMapInstance);
   _Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19,
-    subdomains: 'abcd'
+    maxZoom: 19, subdomains: 'abcd',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
   }).addTo(footprintMapInstance);
 
   const bounds = [];
