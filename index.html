@@ -2472,9 +2472,9 @@ function setView(view){
 function initMap(){
   if(leafletMap) return;
   leafletMap = _Leaflet.map('rmap', {scrollWheelZoom:true}).setView([52.9, -1.5], 6);
-  _Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19, subdomains: 'abcd',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+  _Leaflet.tileLayer('https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=tDhHlbfxdvJqCNl4l8ZN', {
+    maxZoom: 20, tileSize: 512, zoomOffset: -1,
+    attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(leafletMap);
 }
 
@@ -3838,9 +3838,9 @@ function renderFootprintMap(las) {
   const maxHomes = Math.max(...geoLas.map(la => la[4]));
   footprintMapInstance = _Leaflet.map('footprint-map', {scrollWheelZoom: false});
   footprintMapSelectionLayer.addTo(footprintMapInstance);
-  _Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19, subdomains: 'abcd',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+  _Leaflet.tileLayer('https://api.maptiler.com/maps/positron/{z}/{x}/{y}.png?key=tDhHlbfxdvJqCNl4l8ZN', {
+    maxZoom: 20, tileSize: 512, zoomOffset: -1,
+    attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(footprintMapInstance);
 
   const bounds = [];
